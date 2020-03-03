@@ -10,6 +10,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import javax.swing.JToolBar;
+import javax.swing.JButton;
 
 public class Gui {
 
@@ -43,7 +44,8 @@ public class Gui {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(new Color(204, 255, 255));
+		frame.getContentPane().setForeground(new Color(255, 250, 250));
+		frame.getContentPane().setBackground(new Color(221, 160, 221));
 		frame.setBounds(100, 100, 578, 442);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -77,7 +79,18 @@ public class Gui {
 		frame.getContentPane().add(panel_3_2);
 		
 		JToolBar toolBar = new JToolBar();
-		toolBar.setBounds(12, 12, 538, 19);
+		toolBar.setForeground(new Color(255, 255, 255));
+		toolBar.setBackground(new Color(128, 0, 128));
+		toolBar.setBounds(20, 12, 538, 19);
 		frame.getContentPane().add(toolBar);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(20, 55, 442, 264);
+		frame.getContentPane().add(panel_4);
+		
+		JButton btnSave = new JButton("save");
+		btnSave.setBackground(new Color(128, 0, 128));
+		btnSave.setBounds(188, 355, 117, 25);
+		frame.getContentPane().add(btnSave);
 	}
 }
