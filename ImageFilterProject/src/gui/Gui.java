@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.Image;
 
 import javax.swing.JToolBar;
@@ -14,18 +15,23 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class Gui {
 
 	private JFrame frame;
 JLabel label;
+
 	/**hiroko.com, jhipster.tech, jdlstudio, boilerplate
 	 * Launch the application.
 	 */
@@ -71,11 +77,7 @@ JLabel label;
 		lblPhotofilter.setForeground(new Color(255, 255, 255));
 		toolbar.add(lblPhotofilter);
 		
-		JButton btnSave = new JButton("save");
-		btnSave.setForeground(new Color(255, 255, 255));
-		btnSave.setBackground(new Color(128, 0, 128));
-		btnSave.setBounds(295, 362, 117, 25);
-		frame.getContentPane().add(btnSave);
+		
 		
 		JButton openFile = new JButton("Open Image");
 		openFile.setBounds(20, 108, 120, 26);
@@ -99,16 +101,36 @@ JLabel label;
 		openFile.setForeground(Color.WHITE);
 		openFile.setBackground(new Color(127, 0, 128));
 		
-		JButton btnSave_1_1 = new JButton("Load url");
-		btnSave_1_1.addActionListener(new ActionListener() {
+	//save image button	
+		JButton btnSave = new JButton("save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				File file=new File("Filtered_Image/imageFiltered.jpg");
+				try {
+					sauverJlabelDansFile(label, file);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		btnSave.setForeground(new Color(255, 255, 255));
+		btnSave.setBackground(new Color(128, 0, 128));
+		btnSave.setBounds(295, 362, 117, 25);
+		frame.getContentPane().add(btnSave);
+		
+	//load url link	
+		JButton load_url = new JButton("Load url");
+		load_url .addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnSave_1_1.setForeground(Color.WHITE);
-		btnSave_1_1.setBackground(new Color(128, 0, 128));
-		btnSave_1_1.setBounds(20, 227, 120, 26);
-		frame.getContentPane().add(btnSave_1_1);
+		load_url .setForeground(Color.WHITE);
+		load_url .setBackground(new Color(128, 0, 128));
+		load_url .setBounds(20, 227, 120, 26);
+		frame.getContentPane().add(load_url );
 		
+		//this button centent the image
 		JButton btnNewButton = new JButton();
 		btnNewButton.setBounds(578, 54, 50, 49);
 		  try {
@@ -186,5 +208,18 @@ JLabel label;
 		  ImageIcon image= new ImageIcon(newImg);
 		  return image;
 	  }
+	  
+	  public void sauverJlabelDansFile(JLabel panneauImage, File fichier)
+		throws IOException{
+			BufferedImage tamponSauvegarde = new BufferedImage(
+					panneauImage.getPreferredSize().width,
+					panneauImage.getPreferredSize().height,
+					BufferedImage.TYPE_3BYTE_BGR);
+			Graphics g = tamponSauvegarde.getGraphics();
+			g.fillRect(0, 0, panneauImage.getPreferredSize().width,
+					panneauImage.getPreferredSize().height);
+			panneauImage.paint(g);
+			ImageIO.write(tamponSauvegarde, "JPG", fichier);
+		}
 	  
 }
