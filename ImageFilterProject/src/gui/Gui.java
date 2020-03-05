@@ -6,12 +6,19 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
+import java.awt.Image;
+
 import javax.swing.JToolBar;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
+import java.awt.Cursor;
+import java.awt.Label;
+import java.awt.BorderLayout;
 
 public class Gui {
 
@@ -51,34 +58,6 @@ public class Gui {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-		flowLayout.setAlignOnBaseline(true);
-		panel.setBounds(578, 54, 50, 50);
-		frame.getContentPane().add(panel);
-		
-		JPanel panel_1 = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) panel_1.getLayout();
-		flowLayout_1.setAlignOnBaseline(true);
-		panel_1.setBounds(578, 114, 50, 50);
-		frame.getContentPane().add(panel_1);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(578, 175, 50, 50);
-		frame.getContentPane().add(panel_2);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(578, 233, 50, 50);
-		frame.getContentPane().add(panel_3);
-		
-		JPanel panel_3_1 = new JPanel();
-		panel_3_1.setBounds(578, 293, 50, 50);
-		frame.getContentPane().add(panel_3_1);
-		
-		JPanel panel_3_2 = new JPanel();
-		panel_3_2.setBounds(578, 350, 50, 50);
-		frame.getContentPane().add(panel_3_2);
-		
 		JToolBar toolbar = new JToolBar();
 		toolbar.setRollover(true);
 		toolbar.setForeground(new Color(0, 0, 0));
@@ -92,13 +71,19 @@ public class Gui {
 		
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(160, 54, 395, 289);
+		panel_4.setVerifyInputWhenFocusTarget(false);
+		panel_4.setBounds(145, 80, 395, 289);
 		frame.getContentPane().add(panel_4);
+		panel_4.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		panel_4.add(lblNewLabel, BorderLayout.CENTER);
 		
 		JButton btnSave = new JButton("save");
 		btnSave.setForeground(new Color(255, 255, 255));
 		btnSave.setBackground(new Color(128, 0, 128));
-		btnSave.setBounds(295, 362, 117, 25);
+		btnSave.setBounds(292, 375, 117, 25);
 		frame.getContentPane().add(btnSave);
 		
 		JButton btnSave_1 = new JButton("Open Image");
@@ -120,5 +105,77 @@ public class Gui {
 		btnSave_1_1.setBackground(new Color(128, 0, 128));
 		btnSave_1_1.setBounds(20, 227, 120, 26);
 		frame.getContentPane().add(btnSave_1_1);
+		
+		/*
+		 * affichage des filtres de l'images
+		 */
+		
+		JButton btnNewButton = new JButton();
+		btnNewButton.setBounds(578, 54, 50, 49);
+		  try {
+			    Image img = ImageIO.read(getClass().getResource("/cat.png"));
+			    Image newimg = img.getScaledInstance( btnNewButton.getWidth(), btnNewButton.getHeight(),  java.awt.Image.SCALE_SMOOTH ) ; 
+			    btnNewButton.setIcon(new ImageIcon(newimg));
+			  } catch (Exception ex) {
+			    System.out.println(ex);
+			  }
+		frame.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton();
+		btnNewButton_1.setBounds(578, 110, 50, 49);
+		  try {
+			    Image img = ImageIO.read(getClass().getResource("/artifacter.png"));
+			    Image newimg = img.getScaledInstance( btnNewButton_1.getWidth(), btnNewButton_1.getHeight(),  java.awt.Image.SCALE_SMOOTH ) ; 
+			    btnNewButton_1.setIcon(new ImageIcon(newimg));
+			  } catch (Exception ex) {
+			    System.out.println(ex);
+			  }
+		frame.getContentPane().add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton();
+		btnNewButton_2.setBounds(578, 170, 50, 49);
+		  try {
+			    Image img = ImageIO.read(getClass().getResource("/rainbow.png"));
+			    Image newimg = img.getScaledInstance( btnNewButton_2.getWidth(), btnNewButton_2.getHeight(),  java.awt.Image.SCALE_SMOOTH ) ; 
+			    btnNewButton_2.setIcon(new ImageIcon(newimg));
+			  } catch (Exception ex) {
+			    System.out.println(ex);
+			  }
+		frame.getContentPane().add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton();
+		btnNewButton_3.setBounds(578, 229, 50, 49);
+		  try {
+			    Image img = ImageIO.read(getClass().getResource("/repeater.png"));
+			    Image newimg = img.getScaledInstance( btnNewButton_3.getWidth(), btnNewButton_3.getHeight(),  java.awt.Image.SCALE_SMOOTH ) ; 
+			    btnNewButton_3.setIcon(new ImageIcon(newimg));
+			  } catch (Exception ex) {
+			    System.out.println(ex);
+			  }
+		frame.getContentPane().add(btnNewButton_3);
+		
+		JButton btnNewButton_4 = new JButton();
+		btnNewButton_4.setBounds(578, 289, 50, 49);
+		  try {
+			    Image img = ImageIO.read(getClass().getResource("/--rgb-shifter.png"));
+			    Image newimg = img.getScaledInstance( btnNewButton_4.getWidth(), btnNewButton_4.getHeight(),  java.awt.Image.SCALE_SMOOTH ) ; 
+			    btnNewButton_4.setIcon(new ImageIcon(newimg));
+			  } catch (Exception ex) {
+			    System.out.println(ex);
+			  }
+		frame.getContentPane().add(btnNewButton_4);
+		
+		JButton btnNewButton_5 = new JButton();
+		btnNewButton_5.setBounds(578, 343, 50, 49);
+		  try {
+			    Image img = ImageIO.read(getClass().getResource("/--rgb-shift-repeater.png"));
+			    Image newimg = img.getScaledInstance( btnNewButton_5.getWidth(), btnNewButton_5.getHeight(),  java.awt.Image.SCALE_SMOOTH ) ; 
+			    btnNewButton_5.setIcon(new ImageIcon(newimg));
+			  } catch (Exception ex) {
+			    System.out.println(ex);
+			  }
+		frame.getContentPane().add(btnNewButton_5);
 	}
+		
 }
+
