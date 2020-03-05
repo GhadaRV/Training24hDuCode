@@ -98,7 +98,7 @@ public class Gui {
 		JButton btnSave = new JButton("save");
 		btnSave.setForeground(new Color(255, 255, 255));
 		btnSave.setBackground(new Color(128, 0, 128));
-		btnSave.setBounds(273, 355, 117, 25);
+		btnSave.setBounds(295, 362, 117, 25);
 		frame.getContentPane().add(btnSave);
 		
 		JButton btnSave_1 = new JButton("Open Image");
@@ -118,7 +118,7 @@ public class Gui {
 		});
 		btnSave_1_1.setForeground(Color.WHITE);
 		btnSave_1_1.setBackground(new Color(128, 0, 128));
-		btnSave_1_1.setBounds(20, 227, 108, 26);
+		btnSave_1_1.setBounds(20, 227, 120, 26);
 		frame.getContentPane().add(btnSave_1_1);
 	}
 }
