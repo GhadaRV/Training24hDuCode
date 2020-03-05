@@ -109,7 +109,7 @@ public class Gui {
 			}
 		});
 		btnSave_1.setForeground(Color.WHITE);
-		btnSave_1.setBackground(new Color(128, 0, 128));
+		btnSave_1.setBackground(new Color(127, 0, 128));
 		
 		JButton btnSave_1_1 = new JButton("Load url");
 		btnSave_1_1.addActionListener(new ActionListener() {
