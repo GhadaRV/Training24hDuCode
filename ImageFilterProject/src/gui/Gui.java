@@ -105,9 +105,9 @@ JLabel label;
 		JButton btnSave = new JButton("save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				File file=new File("Filtered_Image/imageFiltered.jpg");
+				//File file=new File("Filtered_Image/imageFiltered.jpg");
 				try {
-					sauverJlabelDansFile(label, file);
+					sauverJlabelDansFile(label);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -209,8 +209,9 @@ JLabel label;
 		  return image;
 	  }
 	  
-	  public void sauverJlabelDansFile(JLabel panneauImage, File fichier)
+	  public void sauverJlabelDansFile(JLabel panneauImage)
 		throws IOException{
+		  File fichier=menuSauvegarder();
 			BufferedImage tamponSauvegarde = new BufferedImage(
 					panneauImage.getPreferredSize().width,
 					panneauImage.getPreferredSize().height,
@@ -221,5 +222,19 @@ JLabel label;
 			panneauImage.paint(g);
 			ImageIO.write(tamponSauvegarde, "JPG", fichier);
 		}
+	  
+	  protected File menuSauvegarder(){
+			JFileChooser fenetreMenu = new JFileChooser();
+			File dossier=new File(System.getProperty("user.home"));
+			fenetreMenu.setCurrentDirectory(dossier);
+			fenetreMenu.setFileFilter(new FileNameExtensionFilter("*.images",new String[]{"jpg"}));
+			int resultat = fenetreMenu.showSaveDialog(null);
+			if (resultat == JFileChooser.APPROVE_OPTION){
+				dossier = fenetreMenu.getCurrentDirectory();
+				return fenetreMenu.getSelectedFile();
+			}
+			else return null;
+		}
+		
 	  
 }
