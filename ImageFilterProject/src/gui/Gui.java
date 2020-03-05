@@ -9,21 +9,23 @@ import java.awt.FlowLayout;
 import java.awt.Image;
 
 import javax.swing.JToolBar;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
-import java.awt.Dimension;
-import java.awt.Cursor;
-import java.awt.Label;
-import java.awt.BorderLayout;
 
 public class Gui {
 
 	private JFrame frame;
-
+JLabel label;
 	/**hiroko.com, jhipster.tech, jdlstudio, boilerplate
 	 * Launch the application.
 	 */
@@ -69,32 +71,33 @@ public class Gui {
 		lblPhotofilter.setForeground(new Color(255, 255, 255));
 		toolbar.add(lblPhotofilter);
 		
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setVerifyInputWhenFocusTarget(false);
-		panel_4.setBounds(145, 80, 395, 289);
-		frame.getContentPane().add(panel_4);
-		panel_4.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		panel_4.add(lblNewLabel, BorderLayout.CENTER);
-		
 		JButton btnSave = new JButton("save");
 		btnSave.setForeground(new Color(255, 255, 255));
 		btnSave.setBackground(new Color(128, 0, 128));
-		btnSave.setBounds(292, 375, 117, 25);
+		btnSave.setBounds(295, 362, 117, 25);
 		frame.getContentPane().add(btnSave);
 		
-		JButton btnSave_1 = new JButton("Open Image");
-		btnSave_1.setBounds(20, 108, 120, 26);
-		frame.getContentPane().add(btnSave_1);
-		btnSave_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton openFile = new JButton("Open Image");
+		openFile.setBounds(20, 108, 120, 26);
+		frame.getContentPane().add(openFile);
+		openFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				  JFileChooser file= new JFileChooser();
+				  file.setCurrentDirectory(new File(System.getProperty("user.home")));
+				  FileNameExtensionFilter filter = new FileNameExtensionFilter("*.images","png","jpg");
+				  file.addChoosableFileFilter(filter);
+				  int result= file.showSaveDialog(null);
+				  if(result== JFileChooser.APPROVE_OPTION) {
+					  File selectedFile= file.getSelectedFile();
+					  String path= selectedFile.getAbsolutePath();
+					  label.setIcon(ResizeImage(path));
+				  }else if (result==JFileChooser.CANCEL_OPTION) {
+					  System.out.println("No file selected");
+				  }
 			}
 		});
-		btnSave_1.setForeground(Color.WHITE);
-		btnSave_1.setBackground(new Color(127, 0, 128));
+		openFile.setForeground(Color.WHITE);
+		openFile.setBackground(new Color(127, 0, 128));
 		
 		JButton btnSave_1_1 = new JButton("Load url");
 		btnSave_1_1.addActionListener(new ActionListener() {
@@ -105,10 +108,6 @@ public class Gui {
 		btnSave_1_1.setBackground(new Color(128, 0, 128));
 		btnSave_1_1.setBounds(20, 227, 120, 26);
 		frame.getContentPane().add(btnSave_1_1);
-		
-		/*
-		 * affichage des filtres de l'images
-		 */
 		
 		JButton btnNewButton = new JButton();
 		btnNewButton.setBounds(578, 54, 50, 49);
@@ -175,7 +174,17 @@ public class Gui {
 			    System.out.println(ex);
 			  }
 		frame.getContentPane().add(btnNewButton_5);
-	}
 		
+		label = new JLabel();
+		label.setBounds(195, 108, 326, 198);
+		frame.getContentPane().add(label);
+	}
+	  public ImageIcon ResizeImage(String ImagePath) {
+		  ImageIcon MyImage=new ImageIcon(ImagePath);
+		  Image img=MyImage.getImage();
+		  Image newImg=img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+		  ImageIcon image= new ImageIcon(newImg);
+		  return image;
+	  }
+	  
 }
-
